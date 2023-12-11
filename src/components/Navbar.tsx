@@ -134,7 +134,6 @@ const Navbar = () => {
                     </Toolbar>
                 </Container>
             </AppBar>
-            Navbar
         </>
     )
 }
