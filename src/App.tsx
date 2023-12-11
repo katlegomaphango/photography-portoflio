@@ -1,29 +1,18 @@
 import { Navbar } from "./components"
-import { createApi } from "unsplash-js";
+import { useGetRandomPhotoQuery } from "./redux/services/unsplash";
 
-type Photo = {
-  id: number;
-  width: number;
-  height: number;
-  urls: { large: string; regular: string; raw: string; small: string };
-  color: string | null;
-  user: {
-    username: string;
-    name: string;
-  };
-};
-
-const api = createApi({
-  // Don't forget to set your access token here!
-  // See https://unsplash.com/developers
-  accessKey: import.meta.env.VITE_CLIENT_ID
-});
+const CLIENT_ID = import.meta.env.VITE_CLIENT_ID
 
 const App = () => {
+  const { data, error } = useGetRandomPhotoQuery({ clientID: CLIENT_ID, count: 8})
+  if(error) throw error
+  console.log(data)
+
   return (
     <>
       <Navbar />
       App
+      {data && <img src={data[0].urls.regular} />}
     </>
   )
 }
