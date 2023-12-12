@@ -77,14 +77,23 @@ const Hero = () => {
             {data && 
                 <div className="carousel">
                     <AnimatePresence>
-                        <motion.img 
+                        {/* <motion.img 
                             key={currentIndex} 
                             src={images[currentIndex].urls.regular} 
                             variants={slideVariants}
                             initial={direction === "right" ? "hiddenRight" : "hiddenLeft"}
                             animate="visible"
                             exit="exit"
-                        />
+                        /> */}
+                        <motion.div 
+                            key={currentIndex} 
+                            style={{backgroundImage: `url("${images[currentIndex].urls.regular}")`}}
+                            variants={slideVariants}
+                            initial={direction === "right" ? "hiddenRight" : "hiddenLeft"}
+                            animate="visible"
+                            exit="exit"
+                            className="div-img"
+                        ></motion.div>
                     </AnimatePresence>
                     
                     <div className="slide_direction">

@@ -5,19 +5,18 @@
 
 .carousel {
   position: relative;
-  /* border-radius: 1rem; */
   height: 90vh;
   max-width: 100vw;
   margin: auto;
   overflow: hidden;
 }
 
-.carousel img {
+.carousel .div-img {
   width: 100%;
   height: 100%;
-  /* border-radius: 0.8rem; */
-  /* border: #ff00008e solid 2px; */
-  
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .slide_direction {
@@ -34,9 +33,9 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  margin: auto 10px;
-  height: 25px;
-  width: 25px;
+  margin: auto 1rem;
+  height: 35px;
+  width: 35px;
 }
 
 .left {
