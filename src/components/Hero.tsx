@@ -1,6 +1,6 @@
 import { useGetRandomPhotoQuery } from "../redux/services/unsplash"
 import { CLIENT_ID, Photo } from "../constants"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 
 const slideVariants = {
@@ -55,36 +55,26 @@ const Hero = () => {
     const { data, error } = useGetRandomPhotoQuery({ clientID: CLIENT_ID, count: 5})
     const images: Photo[] = data
     if(error) throw error
-    console.log(images)
+    //console.log(images)
 
-    const handleNext = () => {
-        setDirection('right')
-        setCurrentIndex((prev) => prev+1 === data.length ? 0 : prev + 1)
-    }
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentIndex((prev) => prev + 1 === 5 ? currentIndex - 4 : currentIndex + 1);
+            setDirection((prev) => prev === 'right' ? 'left' : 'right')
+        }, 2000);
 
-    const handlePrev = () => {
-        setDirection('left')
-        setCurrentIndex((prev) => prev-1 < 0 ? data.length : prev - 1)
-    }
+        return () => {
+        clearInterval(interval);
+        };
+    });
 
-    const handleDotClick = (index: number) => {
-        setDirection(index > currentIndex ? "right" : "left")
-        setCurrentIndex(index)
-    }
+    console.log(currentIndex)
 
     return (
         <>
             {data && 
                 <div className="carousel">
                     <AnimatePresence>
-                        {/* <motion.img 
-                            key={currentIndex} 
-                            src={images[currentIndex].urls.regular} 
-                            variants={slideVariants}
-                            initial={direction === "right" ? "hiddenRight" : "hiddenLeft"}
-                            animate="visible"
-                            exit="exit"
-                        /> */}
                         <motion.div 
                             key={currentIndex} 
                             style={{backgroundImage: `url("${images[currentIndex].urls.regular}")`}}
@@ -95,29 +85,7 @@ const Hero = () => {
                             className="div-img"
                         ></motion.div>
                     </AnimatePresence>
-                    
-                    <div className="slide_direction">
-                        <motion.div className="left" variants={slideVariants} whileHover="hover" onClick={handlePrev}>
-                            <svg
-                                xmlns="https://www.w3.org/2000/svg"
-                                height={20}
-                                viewBox="0 96 960 960"
-                                width={20}
-                            >
-                                <path d="M400 976 0 576l400-400 56 57-343 343 343 343-56 57Z" />
-                            </svg>
-                        </motion.div>
-                        <motion.div className="right" variants={slideVariants} whileHover="hover" onClick={handleNext}>
-                            <svg
-                                xmlns="https://www.w3.org/2000/svg"
-                                height={20}
-                                viewBox="0 96 960 960"
-                                width={20}
-                            >
-                                <path d="m304 974-56-57 343-343-343-343 56-57 400 400-400 400Z" />
-                            </svg>
-                        </motion.div>
-                    </div>
+
                     <div className="indicator_container">
                         <div className="indicator">
                             {
@@ -125,7 +93,7 @@ const Hero = () => {
                                     <motion.div
                                         key={index}
                                         className={`dot ${currentIndex === index ? "active" : ""}`}
-                                        onClick={() => handleDotClick(index)}
+                                        // onClick={() => handleDotClick(index)}
                                         initial="initial"
                                         animate={currentIndex === index ? "animate" : ""}
                                         whileHover="hover"
