@@ -32,21 +32,6 @@ const slideVariants = {
     }
 }
 
-const dotsVariants = {
-    initial: {
-        y: 0,
-    },
-        animate: {
-        y: -10,
-        scale: 1.3,
-        transition: { type: "spring", stiffness: 1000, damping: "10" },
-    },
-        hover: {
-        scale: 1.1,
-        transition: { duration: 0.2 },
-    },
-};
-
 
 const Hero = () => {
     const [currentIndex, setCurrentIndex] = useState(0)
@@ -64,7 +49,7 @@ const Hero = () => {
         }, 2000);
 
         return () => {
-        clearInterval(interval);
+            clearInterval(interval);
         };
     });
 
@@ -85,24 +70,6 @@ const Hero = () => {
                             className="div-img"
                         ></motion.div>
                     </AnimatePresence>
-
-                    <div className="indicator_container">
-                        <div className="indicator">
-                            {
-                                images.map((_, index) => (
-                                    <motion.div
-                                        key={index}
-                                        className={`dot ${currentIndex === index ? "active" : ""}`}
-                                        // onClick={() => handleDotClick(index)}
-                                        initial="initial"
-                                        animate={currentIndex === index ? "animate" : ""}
-                                        whileHover="hover"
-                                        variants={dotsVariants}
-                                    ></motion.div>
-                                ))
-                            }
-                        </div>
-                    </div>
                 </div>
             }
             
