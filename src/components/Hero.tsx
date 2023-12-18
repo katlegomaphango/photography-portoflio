@@ -53,9 +53,18 @@ const Hero = () => {
                                         color: 'white'
                                     }}
                                 >
-                                    See The Beauty Of The World Through My Lens
+                                    See The Beauty Of The World Through My Lens.
                                 </Typography>
-
+                                <Typography
+                                    variant="h5"
+                                    sx={{
+                                        fontWeight: 'bold',
+                                        color: 'gold',
+                                        opacity: 1
+                                    }}
+                                >
+                                    Let us capture your moments.
+                                </Typography>
                             </Paper>
                         </motion.div>
                     </AnimatePresence>
