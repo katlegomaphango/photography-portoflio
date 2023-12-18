@@ -2,6 +2,8 @@ import { useGetRandomPhotoQuery } from "../redux/services/unsplash"
 import { CLIENT_ID, Photo } from "../constants"
 import { useEffect, useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
+import { Paper, Typography } from "@mui/material"
+
 
 
 const Hero = () => {
@@ -33,7 +35,29 @@ const Hero = () => {
                             key={currentIndex} 
                             style={{backgroundImage: `url("${images[currentIndex].urls.regular}")`}}
                             className="div-img"
-                        ></motion.div>
+                        >
+                            <Paper 
+                                elevation={24} 
+                                sx={{
+                                    width: 650, 
+                                    background: 'rgba(0, 0, 0, 0.7)',
+                                    opacity: 0.5,
+                                    padding: 2
+                                }} 
+                            >
+                                <Typography
+                                    variant="h2"
+                                    sx={{
+                                        opacity: 1,
+                                        fontWeight: 'bold',
+                                        color: 'white'
+                                    }}
+                                >
+                                    See The Beauty Of The World Through My Lens
+                                </Typography>
+
+                            </Paper>
+                        </motion.div>
                     </AnimatePresence>
                 </div>
             }
